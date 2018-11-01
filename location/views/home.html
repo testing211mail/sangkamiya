@@ -1,0 +1,322 @@
+<div ng-show="adminLoggedIn">
+     
+<div class="card" ng-init="getAllLocations();">
+  <div class="card-header">
+    <div class="row">
+      <div class="col">
+        List of All Locations And Info
+      </div>
+      <div class="col text-right">
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#logoutModal">LogOut</button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <table datatable="ng" class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>Sr.No.</th>
+        <th>Contact Person</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th class="text-center">
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addModal">ADD</button>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="location in locationList">
+        <td>{{$index+1}}</td>
+        <td>{{location.Contact}}</td>
+        <td>{{location.address}}</td>
+        <td>{{location.mobile1}}</td>
+        <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#viewModal" ng-click="getForView(location._id);">View</button>
+            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#editModal" ng-click="getForEdit(location._id);">Edit</button>
+            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" ng-click="getForDelete(location._id);">Delete</button>
+        </td>
+
+    </tr>
+    </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+
+
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addModalLabel">Add New Location</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         <form>
+
+            <div class="form-group row">
+                <label for="addData.Contact" class="col-sm-2 col-form-label">Contact</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" ng-model="addData.Contact" placeholder="" required>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="addData.address" class="col-sm-2 col-form-label">Address</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" ng-model="addData.address" placeholder="" required>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="addData.taluka" class="col-sm-2 col-form-label">Taluka</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" ng-model="addData.taluka" placeholder="" required>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="addData.mobile1" class="col-sm-2 col-form-label">Phone 1</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" ng-model="addData.mobile1" placeholder="" required>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="addData.mobile2"" class="col-sm-2 col-form-label">Phone 2</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" ng-model="addData.mobile2"" placeholder="" required>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="addData.lat"" class="col-sm-2 col-form-label">Latitude</label>
+                <div class="col-sm-4">
+                  <input type="number" step="0.0000001" class="form-control" ng-model="addData.lat" placeholder="" required>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="addData.long" class="col-sm-2 col-form-label">Longitude</label>
+                <div class="col-sm-4">
+                  <input type="number" step="0.0000001" class="form-control" ng-model="addData.long" placeholder="" required>
+                </div>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" ng-click="addNewLocation();">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="viewModalLabel">Viewing Location</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-responsive">
+                   <tr>
+                       <th>Contact Person</th>
+                       <td>{{locDataView.Contact}}</td>
+                   </tr>
+                   <tr>
+                       <th>Address</th>
+                       <td>{{locDataView.address}}</td>
+                   </tr>
+                   <tr>
+                       <th>Taluka</th>
+                       <td>{{locDataView.taluka}}</td>
+                   </tr>
+                   <tr>
+                       <th>Phone 1</th>
+                       <td>{{locDataView.mobile1}}</td>
+                   </tr>
+                   <tr>
+                       <th>Phone 2</th>
+                       <td>{{locDataView.mobile2}}</td>
+                   </tr>
+                   <tr>
+                       <th>Latitude</th>
+                       <td>{{locDataView.lat}}</td>
+                   </tr>
+                   <tr>
+                       <th>Longitude</th>
+                       <td>{{locDataView.long}}</td>
+                   </tr>
+                </table>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalModalLabel">Editing Location</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         <form>
+
+            <div class="form-group row">
+                <label for="locDataEdit.Contact" class="col-sm-2 col-form-label">Contact</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" ng-model="locDataEdit.Contact" placeholder="" required>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="locDataEdit.address" class="col-sm-2 col-form-label">Address</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" ng-model="locDataEdit.address" placeholder="" required>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="locDataEdit.taluka" class="col-sm-2 col-form-label">Taluka</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" ng-model="locDataEdit.taluka" placeholder="" required>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="locDataEdit.mobile1" class="col-sm-2 col-form-label">Phone 1</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" ng-model="locDataEdit.mobile1" placeholder="" required>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="locDataEdit.mobile2"" class="col-sm-2 col-form-label">Phone 2</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" ng-model="locDataEdit.mobile2"" placeholder="" required>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="locDataEdit.lat"" class="col-sm-2 col-form-label">Latitude</label>
+                <div class="col-sm-4">
+                  <input type="number" step="0.0000001" class="form-control" ng-model="locDataEdit.lat" placeholder="" required>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="locDataEdit.long" class="col-sm-2 col-form-label">Longitude</label>
+                <div class="col-sm-4">
+                  <input type="number" step="0.0000001" class="form-control" ng-model="locDataEdit.long" placeholder="" required>
+                </div>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" ng-click="saveEditedLocation(locDataEdit._id);">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Do You Really Want To Delete ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       
+       <table class="table table-responsive">
+                   <tr>
+                       <th>Contact Person</th>
+                       <td>{{locDataDelete.Contact}}</td>
+                   </tr>
+                   <tr>
+                       <th>Address</th>
+                       <td>{{locDataDelete.address}}</td>
+                   </tr>
+                   <tr>
+                       <th>Taluka</th>
+                       <td>{{locDataDelete.taluka}}</td>
+                   </tr>
+                </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" ng-click="deleteLocation(locDataDelete._id);">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="logoutModalLabel">Log Out Admin</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       Do You Really Want To Logout ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" ng-click="logOutAdmin();">Log Out</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+
+<div ng-show="!adminLoggedIn">
+    <div class="d-flex justify-content-center">
+       <div class="card mt-5">
+        <div class="card-header">Please Login</div>
+          <div class="card-body">
+              <form class="form-signin" ng-submit="adminLogin();">
+                <label for="username" class="sr-only">Username</label>
+                <input type="text" id="username" class="form-control" ng-model="username" placeholder="Username" required autofocus>
+                <br>
+                <label for="password" class="sr-only">Password</label>
+                <input type="password" id="password" class="form-control" ng-model="password" placeholder="Password" required>
+                <br>
+                <button class="btn btn-success btn-block" type="submit">Log in</button>
+              </form>
+          </div>
+    </div>
+    </div>    
+</div>
+

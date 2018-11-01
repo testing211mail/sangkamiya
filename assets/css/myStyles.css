@@ -1,0 +1,93 @@
+body{
+	background-color: #f4f4f4;
+}
+.text-yellow{
+	color: yellow;
+}
+
+.bg-ltpurple{
+	background-color :#ce93d8   ;
+}
+.nb-majha{
+	
+	background-color :#7323DC !important ;
+	color:white;
+	
+}
+.text-purple{
+color:#4a148c ;
+}
+
+.text-blue{
+color:blue;
+}
+
+.ulnone a{
+	color: #FFFFFF;
+    text-decoration: none;
+}
+
+.gayab{
+	visibility: none;
+	border: none;
+}
+
+.bg-0{
+	background-color: #000;
+}
+
+.bg-1{
+	background-color: #3CDC46;
+}
+
+.bg-2{
+	background-color: #7323DC;
+}
+
+.bg-3{
+	background-color: #FFDD3C; /*yellow*/
+}
+
+.bg-4{
+	background-color: #1dd38f; /*mt-green*/
+}
+
+.bg-5{
+	background-color: #7323DD;
+}
+
+.bg-6{
+background-color:  #f22b68; /*pink*/
+}
+
+#contactPage .card:hover i,#contactPage .card:hover h4{
+	color: #87d37c;
+}
+/*.goog-te-banner-frame .skiptranslate{
+	display: none;
+}*/
+.goog-te-banner-frame {
+  display: none;
+ left:0px;
+ top:0px;
+ height:39px;
+ width:100%;
+ z-index:10000001;
+ position:fixed;
+ border:none;
+ border-bottom:1px solid #6b90da;
+ margin:0;
+ -moz-box-shadow:0 0 8px 1px #999999;
+ -webkit-box-shadow:0 0 8px 1px #999999;
+ box-shadow:0 0 8px 1px #999999;
+ _position:absolute
+}
+
+
+
+
+
+
+
+
+
